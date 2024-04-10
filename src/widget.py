@@ -21,5 +21,4 @@ def masks_card_and_account(card_or_account):
 print(masks_card_and_account('Visa Gold 5999414228426353'))
 print(masks_card_and_account('Maestro 1596837868705199'))
 print(masks_card_and_account('Visa Classic 6831982476737658'))
-print(masks_card_and_account('Visa Platinum 8990922113665229'))
-print(masks_card_and_account('Счет 73654108430135874305'))
+
