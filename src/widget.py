@@ -16,7 +16,3 @@ def masks_card_and_account(card_or_account: str) -> str:
 
     else:
         return f"{card_or_account[:4]} **{card_or_account[21:]}"
-
-
-
-
