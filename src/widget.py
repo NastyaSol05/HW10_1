@@ -16,3 +16,10 @@ def masks_card_and_account(card_or_account: str) -> str:
 
     else:
         return f"{card_or_account[:4]} **{card_or_account[21:]}"
+
+
+def return_date(datetimes: str) -> str:
+    """ Функция, которая возвращает строку с датой """
+    return f'{datetimes[8:10]}.{datetimes[5:7]}.{datetimes[:4]}'
+
+
