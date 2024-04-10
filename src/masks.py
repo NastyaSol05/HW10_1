@@ -1,8 +1,14 @@
-def number_card(card): return f"{card[:4]} {card[4:6]}** **** {card[12:]}"
+import os
 
 
-def number_account(number): return f"**{number[16:]}"
+def number_card(card: str) -> str:
+    """ Функция принимает на вход номер карты и возвращает ее маску"""
+    return f"{card[:4]} {card[4:6]}** **** {card[12:]}"
 
 
-print(number_account('73654108430135874305'))
+def number_account(number: str) -> str:
+    """ Функция принимает на вход номер счета и возвращает его маску """
+    return f"**{number[16:]}"
+
+
 
