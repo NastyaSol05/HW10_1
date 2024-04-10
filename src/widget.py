@@ -18,7 +18,5 @@ def masks_card_and_account(card_or_account):
         return f"{card_or_account[:4]} **{card_or_account[21:]}"
 
 
-print(masks_card_and_account('Visa Gold 5999414228426353'))
-print(masks_card_and_account('Maestro 1596837868705199'))
-print(masks_card_and_account('Visa Classic 6831982476737658'))
+
 
