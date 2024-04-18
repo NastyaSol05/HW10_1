@@ -2,7 +2,7 @@ import datetime
 from src.widget import date_output
 
 
-def read_list_dict(list_dict: list, state: str = "EXECUTED") -> list:
+def dictionary_filter(list_dict: list, state: str = "EXECUTED") -> list:
     """
     Функция, которая возвращает новый список,  содержащий только,
     у которых ключ stage содержит переданное в функцию значение
@@ -14,7 +14,7 @@ def read_list_dict(list_dict: list, state: str = "EXECUTED") -> list:
     return new_list_dict
 
 
-def dict_sort_date(list_dict: list, reverse: bool = False) -> list:
+def sort_by_date(list_dict: list, reverse: bool = False) -> list:
     """ Функция сортирует список со словарями по дате, поубыванию или возрастанию"""
     if not reverse:
         return sorted(
