@@ -2,7 +2,7 @@ from src.masks import number_account, number_card
 
 
 def masks_card_and_account(card_or_account: str) -> str:
-    """ Функцию, которая работает как с картами, так и со счетами и возвращает их маску"""
+    """Функцию, которая работает как с картами, так и со счетами и возвращает их маску"""
     number = card_or_account.split(" ")[-1]
 
     if "Счет" in card_or_account:
@@ -12,5 +12,5 @@ def masks_card_and_account(card_or_account: str) -> str:
 
 
 def date_output(datetimes: str) -> str:
-    """ Функция, которая возвращает строку с датой """
+    """Функция, которая возвращает строку с датой"""
     return f'{datetimes[8:10]}.{datetimes[5:7]}.{datetimes[:4]}'

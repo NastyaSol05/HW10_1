@@ -1,4 +1,5 @@
 import datetime
+
 from src.widget import date_output
 
 
@@ -15,10 +16,10 @@ def dictionary_filter(list_dict: list, state: str = "EXECUTED") -> list:
 
 
 def sort_by_date(list_dict: list, reverse: bool = False) -> list:
-    """ Функция сортирует список со словарями по дате, поубыванию или возрастанию"""
+    """Функция сортирует список со словарями по дате, поубыванию или возрастанию"""
     if not reverse:
         return sorted(
-            list_dict, key=lambda x: datetime.datetime.strptime(date_output(x["date"]), "%d.%m.%Y"),
-            reverse=True)
+            list_dict, key=lambda x: datetime.datetime.strptime(date_output(x["date"]), "%d.%m.%Y"), reverse=True
+        )
     else:
         return sorted(list_dict, key=lambda x: datetime.datetime.strptime(date_output(x["date"]), "%d.%m.%Y"))
