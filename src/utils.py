@@ -9,10 +9,10 @@ load_dotenv()
 API_KEY = os.getenv("API_KEY")
 
 
-def loads_json() -> Any:
+def loads_json(path: str) -> Any:
     """Функция, которая  принимает на вход путь до JSON-файла и возвращает список"""
-    with open(os.path.abspath("../data/operations.json"), encoding="utf-8") as f:
-        if os.stat("../data/operations.json").st_size == 0:
+    with open(os.path.abspath(path), encoding="utf-8") as f:
+        if os.stat(path).st_size == 0:
             return []
         else:
             return json.load(f)
