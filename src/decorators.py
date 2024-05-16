@@ -5,9 +5,7 @@ from typing import Any, Callable, Union
 def log(filename: Union[str, None] = None) -> Callable:
     """Внутренняя функция, которая записывает в файл логи выполнения функций"""
     def inner(func: Callable) -> Callable:
-        """Внутренняя функция, которая записывает в файл логи выполнения функций"""
         def wrapper(*args: Any, **kwargs: Any) -> Any:
-            """Внутренняя внутренняя функция, которая записывает в файл логи выполнения функций"""
             return_value = None
             result = f"{'{:%Y-%m-%d %H:%M:%S}'.format(datetime.datetime.now())} {func.__name__}"
             try:
