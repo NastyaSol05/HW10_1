@@ -4,6 +4,7 @@ from typing import Any, Callable, Union
 
 def log(filename: Union[str, None] = None) -> Callable:
     """Внутренняя функция, которая записывает в файл логи выполнения функций"""
+
     def inner(func: Callable) -> Callable:
         def wrapper(*args: Any, **kwargs: Any) -> Any:
             return_value = None
