@@ -3,8 +3,9 @@ import os
 from typing import Any
 
 import requests  # type: ignore
-from src.logger import logger
 from dotenv import load_dotenv
+
+from src.logger import logger
 
 load_dotenv()
 API_KEY = os.getenv("API_KEY")
@@ -42,24 +43,9 @@ def transaction_operation(operation: dict) -> float:
             logger.info("response received")
             result = response.json()
             amount = operation["operationAmount"]["amount"]
-            return float((result["result"] + float(amount)) * result["result"] / float(amount))
+            return float(result["result"] * float(amount))
+
+        return 0.0
     else:
         logger.error("can't get operation amount")
         return 0.0
-
-
-print(transaction_operation({
-    "id": 41428829,
-    "state": "EXECUTED",
-    "date": "2019-07-03T18:35:29.512364",
-    "operationAmount": {
-      "amount": "8221.37",
-      "currency": {
-        "name": "USD",
-        "code": "USD"
-      }
-    },
-    "description": "Перевод организации",
-    "from": "MasterCard 7158300734726758",
-    "to": "Счет 35383033474447895560"
-  }))
