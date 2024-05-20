@@ -3,6 +3,7 @@ import os
 from typing import Any
 
 import requests  # type: ignore
+from src.logger import logger
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -13,16 +14,20 @@ def read_json(path: str) -> Any:
     """Функция, которая  принимает на вход путь до JSON-файла и возвращает список"""
     try:
         file = open(os.path.abspath(path), encoding="utf-8")
+        logger.info("open json file")
     except IOError:
+        logger.error("can't open json file")
         return []
     else:
         with file:
+            logger.info("read json file")
             return json.load(file)
 
 
 def transaction_operation(operation: dict) -> float:
     """Функция, которая принимает на вход транзакцию и возвращает сумму транзакции"""
     value = operation["operationAmount"]["currency"]["code"]
+    logger.info(f"get {value} operation amount")
     if value == "RUB":
         return float(operation["operationAmount"]["amount"])
     elif value in ["USD", "EUR"]:
@@ -33,8 +38,28 @@ def transaction_operation(operation: dict) -> float:
 
         response = requests.get(url, headers=headers, data=payload)
 
-        result = response.json()
-        amount = operation["operationAmount"]["amount"]
-        return float((result["result"] + float(amount)) * result["result"] / float(amount))
+        if response.ok:
+            logger.info("response received")
+            result = response.json()
+            amount = operation["operationAmount"]["amount"]
+            return float((result["result"] + float(amount)) * result["result"] / float(amount))
     else:
+        logger.error("can't get operation amount")
         return 0.0
+
+
+print(transaction_operation({
+    "id": 41428829,
+    "state": "EXECUTED",
+    "date": "2019-07-03T18:35:29.512364",
+    "operationAmount": {
+      "amount": "8221.37",
+      "currency": {
+        "name": "USD",
+        "code": "USD"
+      }
+    },
+    "description": "Перевод организации",
+    "from": "MasterCard 7158300734726758",
+    "to": "Счет 35383033474447895560"
+  }))
