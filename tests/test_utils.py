@@ -36,4 +36,4 @@ def test_transaction_operation(mock_get: None) -> None:
         }
     )
 
-    assert operation == response_value
+    assert str(operation) == response_value
