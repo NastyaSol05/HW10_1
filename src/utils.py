@@ -27,7 +27,11 @@ def read_json(path: str) -> Any:
 
 def transaction_operation(operation: dict) -> float:
     """Функция, которая принимает на вход транзакцию и возвращает сумму транзакции"""
-    value = operation["operationAmount"]["currency"]["code"]
+    if "operationAmount" in operation:
+        value = operation["operationAmount"]["currency"]["code"]
+    else:
+        value = operation.get("currency_code")
+
     logger.info(f"get {value} operation amount")
     if value == "RUB":
         return float(operation["operationAmount"]["amount"])
@@ -42,7 +46,12 @@ def transaction_operation(operation: dict) -> float:
         if response.ok:
             logger.info("response received")
             result = response.json()
-            amount = operation["operationAmount"]["amount"]
+
+            if "operationAmount" in operation:
+                amount = operation["operationAmount"]["amount"]
+            else:
+                amount = operation.get("amount")
+
             return float(result["result"] * float(amount))
 
         return 0.0
