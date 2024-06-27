@@ -1,5 +1,6 @@
 import datetime
 import re
+from collections import Counter
 
 from src.widget import date_output
 
@@ -27,9 +28,23 @@ def sort_by_date(list_dict: list, reverse: bool = False) -> list:
 
 
 def filter_by_regex(data: list, regex: str) -> list:
+    """ функция принимает список с банковскими операциях и строку поиска и возвращает список, где есть данная строка"""
     list_regex = []
     pattern = re.compile(rf"\b{regex.lower()}\b")
     for i in data:
         if "description" in i and re.search(pattern, i.get("description").lower()):
             list_regex.append(i)
     return list_regex
+
+
+def operation_categories(operations: list, categories: dict) -> dict:
+    """ функция, которая возвращает словарь, в котором ключи — названия категорий, значения — количество операций """
+    categories_counter: dict[str, int] = Counter()
+    for i in operations:
+        if 'description' in i:
+            for category, key in categories.items():
+                if any(j.lower() in i.get("description").lower() for j in key):
+                    categories_counter[category] += 1
+                    break
+
+    return categories_counter
