@@ -1,6 +1,6 @@
 import csv
 import os
-from typing import Any, List
+from typing import Any
 
 import pandas as pd  # type: ignore
 
@@ -24,4 +24,4 @@ def read_file_csv(filename: str) -> Any:
 
 def read_file_read_excel(filename: str) -> Any:
     df = pd.read_excel(filename, index_col=0)
-    return df.to_dict('records')
+    return df.to_dict("records")
